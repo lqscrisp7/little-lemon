@@ -1,15 +1,23 @@
+html {
+  display: flex;
+  justify-content: center;
+}
+
 body {
-  margin: 20px 40px;
+  margin: 20px 20px;
   text-align: center;
   font-family: 'Markazi Text';
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
 }
 
 header {
   display: flex;
   column-gap: 50px;
   align-items: center;
-  justify-content: center;
   margin-bottom: 20px;
+  flex-wrap: wrap;
 }
 
 .header-nav {
@@ -17,6 +25,7 @@ header {
     display: flex;
     column-gap: 15px;
     list-style-type: none;
+    flex-wrap: wrap;
   }
 
   a {
@@ -38,7 +47,7 @@ a:hover {
 footer {
   display: flex;
   column-gap: 40px;
-  justify-content: center;
+  flex-wrap: wrap;
 
   article {
     text-align: left;
