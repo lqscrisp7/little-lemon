@@ -10,6 +10,7 @@ body {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+  max-width: 1191px;
 }
 
 header {
@@ -18,6 +19,7 @@ header {
   align-items: center;
   margin-bottom: 20px;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .header-nav {
@@ -26,6 +28,8 @@ header {
     column-gap: 15px;
     list-style-type: none;
     flex-wrap: wrap;
+    row-gap: 5px;
+    justify-content: center;
   }
 
   a {
@@ -33,6 +37,7 @@ header {
     color: #000000;
     font-weight: bold;
     font-size: 24px;
+    text-transform: uppercase;
   }
 
   li:last-child {
@@ -48,6 +53,9 @@ footer {
   display: flex;
   column-gap: 40px;
   flex-wrap: wrap;
+  margin-top: 20px;
+  row-gap: 30px;
+  justify-content: space-evenly;
 
   article {
     text-align: left;
@@ -80,5 +88,190 @@ footer {
   a {
     text-decoration: none;
     color: #000000;
+  }
+}
+
+.homepage {
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+}
+
+.call-to-action {
+  display: flex;
+  column-gap: 10px;
+  background-color: #495E57;
+  text-align: left;
+  padding: 10px 20px;
+  justify-content: space-between;
+
+  h1 {
+    color: #F4CE14;
+    font-size: 64px;
+    font-weight: bold;
+    margin: 0px;
+  }
+
+  h5 {
+    color: #EDEFEE;
+    font-size: 32px;
+    font-weight: bold;
+    margin: 0px;
+  }
+
+  p {
+    color: #EFEFEE;
+    font-family: 'Karla';
+    font-size: 20px;
+    margin: 20px 0px 10px 0px;
+    height: 115px;
+  }
+}
+
+button {
+  background-color: #F4CE14;
+  border-radius: 15px;
+  width: 200px;
+  height: 60px;
+  color: #000000;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+button:hover {
+  background-color: #ccad11;
+}
+
+button:active {
+  box-shadow: inset 0px 10px 20px 2px rgba(0, 0, 0, 0.25);
+}
+
+.specials {
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+  justify-content: center;
+  padding: 0px 20px;
+
+  .heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .dish-container {
+    display: flex;
+    column-gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+    row-gap: 10px;
+
+    .dish-card {
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+      border-radius: 10px 10px 0px 0px;
+    }
+
+    .dish-detail {
+      width: 265px;
+      background-color: #EDEFEE;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px;
+      width: 225px;
+      height: 215px;
+
+      .dish-detail-top {
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
+      }
+
+      .name-price {
+        display: flex;
+        justify-content: space-between;
+        font-weight: bold;
+        align-items: center;
+
+        .name {
+          font-size: 24px;
+        }
+
+        .price {
+          font-size: 18px;
+          color: #EE9972;
+        }
+      }
+
+      .dish-description {
+        font-family: 'Karla';
+        font-size: 16px;
+        color: #495e57;
+        text-align: left;
+      }
+
+      .order-row {
+        display: flex;
+        column-gap: 10px;
+        align-items: center;
+
+        .order {
+          font-family: 'Karla';
+          font-size: 16px;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
+
+h2 {
+  font-size: 40px;
+  font-family: 'Karla';
+}
+
+.customers-says {
+  background-color: #495E57;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0px 20px 20px 10px;
+
+  .rating-card-container {
+    display: flex;
+    column-gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    row-gap: 10px;
+  }
+
+  .rating-card {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    width: 200px;
+    background-color: #EDEFEE;
+    padding: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+
+    .rating-row {
+      display: flex;
+      align-items: center;
+      column-gap: 3px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .review-text {
+      text-align: left;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 18px;
+    }
   }
 }
