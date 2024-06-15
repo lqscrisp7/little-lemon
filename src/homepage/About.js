@@ -1,6 +1,6 @@
 function About() {
     return (
-        <div className="call-to-action" style={{ backgroundColor: 'unset', flexWrap: 'wrap', borderBottom: '2px solid black' }}>
+        <div className="call-to-action" style={{ backgroundColor: 'unset', flexWrap: 'wrap' }}>
             <div className="description" style={{ width: '635px' }}>
                 <h1>Little Lemon</h1>
                 <h5 style={{ color: 'black' }}>Chicago</h5>

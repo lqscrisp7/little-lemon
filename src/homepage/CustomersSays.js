@@ -30,7 +30,7 @@ function CustomersSays() {
 
     return (
         <div className="customers-says">
-            <h2>Customers Says</h2>
+            <h2 style={{ color: '#EFEFEE' }}>Customers Says</h2>
             <div className="rating-card-container">
                 {rating.map(x =>
                     <article className="rating-card">

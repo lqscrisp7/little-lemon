@@ -1,6 +1,8 @@
-function BookingPage() {
+import BookingForm from "./BookingForm"
+
+function BookingPage(props) {
     return (
-        <div>Booking Page</div>
+        <BookingForm {...props} />
     )
 }
 
