@@ -307,6 +307,7 @@ h1 {
     width: 235px;
     text-align: left;
     font-size: 32px;
+    align-self: flex-start;
     color: #495E57;
   }
 
@@ -318,6 +319,7 @@ h1 {
     border: 2px solid black;
     font-size: 20px;
     color: #495E57;
+    outline: none;
   }
 
   input[type="date"] {
@@ -360,5 +362,28 @@ h1 {
     color: #495E57;
     padding: 5px 10px;
     width: 276px;
+    outline: none;
   }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    border: 2px solid #ccad11 !important;
+  }
+
+  input.error {
+    border: 2px solid red !important;
+  }
+}
+
+.input-error-container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 3px;
+}
+
+.error-msg {
+  text-align: left;
+  color: red;
+  margin-left: 2px;
 }

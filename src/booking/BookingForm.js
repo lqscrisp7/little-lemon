@@ -1,32 +1,38 @@
-import { useEffect, useRef, useState } from "react"
+import { useRef, useState } from "react"
 import { IoIosArrowDown } from "react-icons/io";
 import { LuClock2 } from "react-icons/lu";
 import { FaGlassCheers } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
 
 function BookingForm(props) {
     const [date, setDate] = useState()
+    const [dateMsg, setDateMsg] = useState('')
     const [time, setTime] = useState(props.availableTimes[0])
     const [guest, setGuest] = useState(1)
+    const [guestMsg, setGuestMsg] = useState('')
     const [seatLocation, setSeatLoaction] = useState('indoor')
     const [occasion, setOccasion] = useState('Birthday')
     const [firstName, setFirstName] = useState()
+    const [firstNameMsg, setFirstNameMsg] = useState('')
     const [lastName, setLastName] = useState()
+    const [lastNameMsg, setLastNameMsg] = useState('')
     const [contact, setContact] = useState()
+    const [contactMsg, setContactMsg] = useState('')
     const [additionalRequirements, setAdditionalRequirements] = useState()
     const btnRef = useRef()
 
     const handleFormSubmit = (e) => {
         e.preventDefault()
         const bookingData = { date: date, time: time, guest: guest, seatLocation: seatLocation, occasion: occasion, firstName: firstName, lastName: lastName, contact: contact, additionalRequirements: additionalRequirements }
-        props.submitForm(bookingData)
-        const getBookings = localStorage.getItem("bookings")
-        let allBookings = []
-        if (getBookings)
-            allBookings = JSON.stringify([...JSON.parse(getBookings), JSON.stringify(bookingData)])
-        else
-            allBookings = JSON.stringify([JSON.stringify(bookingData)])
-        localStorage.setItem("bookings", allBookings)
+        if (dateMsg === '' && guestMsg === '' && firstNameMsg === '' && lastNameMsg === '' && contactMsg === '') {
+            props.submitForm(bookingData)
+            const getBookings = localStorage.getItem("bookings")
+            let allBookings = []
+            if (getBookings)
+                allBookings = JSON.stringify([...JSON.parse(getBookings), JSON.stringify(bookingData)])
+            else
+                allBookings = JSON.stringify([JSON.stringify(bookingData)])
+            localStorage.setItem("bookings", allBookings)
+        }
     }
 
     return (
@@ -35,10 +41,18 @@ function BookingForm(props) {
             <form onSubmit={handleFormSubmit} className="booking-form">
                 <div className="input-field">
                     <label htmlFor="res-date">Date</label>
-                    <input type="date" id="res-date" value={date} onChange={(e) => {
-                        setDate(e.target.value);
-                        props.setAvailableTimes({ date: new Date(e.target.value) })
-                    }} />
+                    <div className="input-error-container">
+                        <input type="date" id="res-date" className={dateMsg !== '' && 'error'} value={date} min={new Date().toISOString().split('T')[0]} onChange={(e) => {
+                            setDate(e.target.value);
+                            setDateMsg('')
+                            props.setAvailableTimes({ date: e.target.value === '' ? new Date() : new Date(e.target.value) })
+                        }}
+                            onBlur={() => {
+                                if (date === undefined || date === '')
+                                    setDateMsg("Please select a date.")
+                            }} />
+                        {dateMsg !== '' && <div className="error-msg">{dateMsg}</div>}
+                    </div>
                 </div>
                 <div className="input-field">
                     <label htmlFor="res-time">Time</label>
@@ -50,7 +64,17 @@ function BookingForm(props) {
                 </div>
                 <div className="input-field">
                     <label htmlFor="guests">Number of Diners</label>
-                    <input type="number" placeholder="1" min="1" max="10" id="guests" value={guest} onChange={(e) => setGuest(e.target.value)} />
+                    <div className="input-error-container">
+                        <input type="number" className={guestMsg !== '' && 'error'} placeholder="1" min="1" max="10" id="guests" value={guest}
+                            onChange={(e) => {
+                                setGuest(e.target.value);
+                                if (e.target.value < 1)
+                                    setGuestMsg('Please reserve for at least one diners.')
+                                else
+                                    setGuestMsg('')
+                            }} />
+                        {guestMsg !== '' && <div className="error-msg">{guestMsg}</div>}
+                    </div>
                 </div>
                 <div className="input-field">
                     <label>Seat Location</label>
@@ -70,21 +94,50 @@ function BookingForm(props) {
                 </div>
                 <div className="input-field">
                     <label htmlFor="first-name">First Name</label>
-                    <input type="text" id="first-name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+                    <div className="input-error-container">
+                        <input type="text" className={firstNameMsg !== '' && 'error'} id="first-name" value={firstName} onChange={(e) => setFirstName(e.target.value)}
+                            onBlur={() => {
+                                if (firstName === undefined || firstName.trim() === '')
+                                    setFirstNameMsg('Please enter your first name.')
+                                else
+                                    setFirstNameMsg('')
+                            }} />
+                        {firstNameMsg !== '' && <div className="error-msg">{firstNameMsg}</div>}
+                    </div>
                 </div>
                 <div className="input-field">
                     <label htmlFor="last-name">Last Name</label>
-                    <input type="text" id="last-name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+                    <div className="input-error-container">
+                        <input type="text" className={lastNameMsg !== '' && 'error'} id="last-name" value={lastName} onChange={(e) => setLastName(e.target.value)}
+                            onBlur={() => {
+                                if (lastName === undefined || lastName.trim() === '')
+                                    setLastNameMsg('Please enter your last name.')
+                                else
+                                    setLastNameMsg('')
+                            }} />
+                        {lastNameMsg !== '' && <div className="error-msg">{lastNameMsg}</div>}
+                    </div>
                 </div>
                 <div className="input-field">
                     <label htmlFor="contact">Contact Number</label>
-                    <input type="text" id="contact" value={contact} onChange={(e) => setContact(e.target.value)} />
+                    <div className="input-error-container">
+                        <input className={contactMsg !== '' && 'error'} pattern="^(\+?6?01)[02-46-9]-*[0-9]{7}$|^(\+?6?01)[1]-*[0-9]{8}$" type="text" id="contact" placeholder="012-3456789" value={contact} onChange={(e) => setContact(e.target.value)}
+                            onBlur={(e) => {
+                                if (contact === undefined || contact.trim() === '')
+                                    setContactMsg('Please enter your contact number.')
+                                else if (!e.target.checkValidity())
+                                    setContactMsg('Please enter a valid contact number.')
+                                else
+                                    setContactMsg('')
+                            }} />
+                        {contactMsg !== '' && <div className="error-msg">{contactMsg}</div>}
+                    </div>
                 </div>
                 <div className="input-field" style={{ alignItems: 'flex-start' }}>
                     <label htmlFor="additional-requirements">Additional Requirements</label>
                     <textarea id="additional-requirements" value={additionalRequirements} onChange={(e) => setAdditionalRequirements(e.target.value)} />
                 </div>
-                <button ref={btnRef} type="submit" role="button">Reserve Now</button>
+                <button aria-label="On Click" ref={btnRef} type="submit" role="button">Reserve Now</button>
             </form>
         </div>
     )
