@@ -137,7 +137,7 @@ function BookingForm(props) {
                     <label htmlFor="additional-requirements">Additional Requirements</label>
                     <textarea id="additional-requirements" value={additionalRequirements} onChange={(e) => setAdditionalRequirements(e.target.value)} />
                 </div>
-                <button aria-label="On Click" disabled={!(dateMsg === '' && guestMsg === '' && firstNameMsg === '' && lastNameMsg === '' && contactMsg === '')} ref={btnRef} type="submit" role="button">Reserve Now</button>
+                <button aria-label="On Click" className={!(dateMsg === '' && guestMsg === '' && firstNameMsg === '' && lastNameMsg === '' && contactMsg === '') && 'disabled'} ref={btnRef} type="submit" role="button">Reserve Now</button>
             </form>
         </div>
     )

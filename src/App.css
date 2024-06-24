@@ -374,6 +374,11 @@ h1 {
   input.error {
     border: 2px solid red !important;
   }
+
+  button.disabled {
+    pointer-events: none;
+    background-color: #ccad11;
+  }
 }
 
 .input-error-container {
