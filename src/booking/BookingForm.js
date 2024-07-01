@@ -6,7 +6,7 @@ import { FaGlassCheers } from "react-icons/fa";
 function BookingForm(props) {
     const [date, setDate] = useState()
     const [dateMsg, setDateMsg] = useState('')
-    const [time, setTime] = useState(props.availableTimes[0])
+    const [time, setTime] = useState(props.availableTimes ? props.availableTimes[0] : '11:00')
     const [guest, setGuest] = useState(1)
     const [guestMsg, setGuestMsg] = useState('')
     const [seatLocation, setSeatLoaction] = useState('indoor')
@@ -58,7 +58,7 @@ function BookingForm(props) {
                     <label htmlFor="res-time">Time</label>
                     <LuClock2 size={25} style={{ position: 'absolute' }} />
                     <select id="res-time" value={time} onChange={(e) => setTime(e.target.value)}>
-                        {props.availableTimes.map(x => <option value={x}>{x}</option>)}
+                        {(props.availableTimes ? props.availableTimes : ['11:00', '12:00', '13:00']).map(x => <option key={x} value={x}>{x}</option>)}
                     </select>
                     <IoIosArrowDown size={25} style={{ position: 'absolute', right: '20px' }} />
                 </div>
@@ -130,7 +130,7 @@ function BookingForm(props) {
                                 else
                                     setContactMsg('')
                             }} />
-                        {contactMsg !== '' && <div className="error-msg">{contactMsg}</div>}
+                        {contactMsg !== '' && <div className="error-msg" role="error">{contactMsg}</div>}
                     </div>
                 </div>
                 <div className="input-field" style={{ alignItems: 'flex-start' }}>
