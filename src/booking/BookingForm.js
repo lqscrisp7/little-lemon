@@ -23,7 +23,7 @@ function BookingForm(props) {
     const handleFormSubmit = (e) => {
         e.preventDefault()
         const bookingData = { date: date, time: time, guest: guest, seatLocation: seatLocation, occasion: occasion, firstName: firstName, lastName: lastName, contact: contact, additionalRequirements: additionalRequirements }
-        if (dateMsg === '' && guestMsg === '' && firstNameMsg === '' && lastNameMsg === '' && contactMsg === '') {
+        if (date && firstName && lastName && contact) {
             props.submitForm(bookingData)
             const getBookings = localStorage.getItem("bookings")
             let allBookings = []
@@ -137,7 +137,7 @@ function BookingForm(props) {
                     <label htmlFor="additional-requirements">Additional Requirements</label>
                     <textarea id="additional-requirements" value={additionalRequirements} onChange={(e) => setAdditionalRequirements(e.target.value)} />
                 </div>
-                <button aria-label="On Click" className={!(dateMsg === '' && guestMsg === '' && firstNameMsg === '' && lastNameMsg === '' && contactMsg === '') && 'disabled'} ref={btnRef} type="submit" role="button">Reserve Now</button>
+                <button aria-label="On Click" className={!(date && firstName && lastName && contact) && 'disabled'} ref={btnRef} type="submit" role="button">Reserve Now</button>
             </form>
         </div>
     )
